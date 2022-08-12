@@ -1,6 +1,4 @@
-import Anchor from "components/Anchor";
-import Button from "components/Button";
-import Input from "components/Input";
+import { Anchor, Button, Input } from "components";
 import React from "react";
 
 export default function Signup() {
@@ -22,10 +20,7 @@ export default function Signup() {
           >
             회원가입
           </Button>
-          <Anchor
-            to="/signup"
-            className="bg-sky-400 text-white flex justify-center"
-          >
+          <Anchor to="/" className="bg-sky-400 text-white flex justify-center">
             취소
           </Anchor>
         </div>
