@@ -3,6 +3,7 @@ import Home from "pages/Home";
 import Todo from "pages/Todo";
 import { util } from "utils";
 import Signup from "pages/Signup";
+import { AuthProvider } from "components";
 
 const routes = [
   {
@@ -22,11 +23,13 @@ const routes = [
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        {routes.map((route) => (
-          <Route key={util.uuid()} {...route}></Route>
-        ))}
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          {routes.map((route) => (
+            <Route key={util.uuid()} {...route}></Route>
+          ))}
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

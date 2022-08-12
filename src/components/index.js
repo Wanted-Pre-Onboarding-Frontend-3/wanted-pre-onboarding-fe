@@ -1,6 +1,6 @@
+import Input from "./Input";
+import Button from "./Button";
+import Anchor from "./Anchor";
+import AuthProvider from "./AuthProvider";
 
-import Input from "./Input"
-import Button from "./Button"
-import Anchor from "./Anchor"
-
-export { Input, Button, Anchor }
+export { Input, Button, Anchor, AuthProvider };
