@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "pages/Home";
 import Todo from "pages/Todo";
 import { util } from "utils";
+import Signup from "pages/Signup";
 
 const routes = [
   {
@@ -11,6 +12,10 @@ const routes = [
   {
     path: "/todo",
     element: <Todo />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
   },
 ];
 
