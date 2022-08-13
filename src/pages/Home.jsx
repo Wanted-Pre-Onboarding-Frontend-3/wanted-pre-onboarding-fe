@@ -1,16 +1,19 @@
 import { Anchor, Button, Input } from "components";
-import React, { useState } from "react";
+import React from "react";
+import { Navigate } from "react-router";
 import { api } from "services";
-import { hooks } from "utils";
+import { useAuth, useInputs } from "utils/hooks";
 
 export default function Home() {
-  const { inputs, handleInput } = hooks.useInputs();
+  const { inputs, handleInput } = useInputs();
+  const { isLogin } = useAuth();
 
   const handleForm = async (e) => {
     e.preventDefault();
-    const res = await api.signIn(inputs);
+    await api.signIn(inputs);
   };
 
+  if (isLogin) return <Navigate to="/todo" />;
   return (
     <main className="w-screen h-screen flex flex-col justify-center items-center">
       <form
