@@ -15,50 +15,64 @@ const headers = () => {
 };
 
 export const get = async (url, options) => {
-  const res = await fetch(`${BASE_URL}${url}`, {
-    method: "GET",
-    headers: headers(),
-    ...options,
-  });
-  const data = res.json();
-
-  return data;
+  try {
+    const res = await fetch(`${BASE_URL}${url}`, {
+      method: "GET",
+      headers: headers(),
+      ...options,
+    });
+    const data = res.json();
+    
+    return data;
+  } catch (error) {
+    console.warn(error);
+  }
 };
 
 export const post = async (url, options) => {
-  const { body, ...restOptions } = options;
-  const res = await fetch(`${BASE_URL}${url}`, {
-    method: "POST",
-    headers: headers(),
-    body: JSON.stringify(body),
-    ...restOptions,
-  });
-  const data = res.json();
+  try {
+    const { body, ...restOptions } = options;
 
-  return data;
+    const res = await fetch(`${BASE_URL}${url}`, {
+      method: "POST",
+      headers: headers(),
+      body: JSON.stringify(body),
+      ...restOptions,
+    });
+    const data = res.json();
+
+    return data;
+  } catch (error) {
+    console.warn(error);
+  }
 };
 
 export const put = async (url, options) => {
-  const { body, ...restOptions } = options;
+  try {
+    const { body, ...restOptions } = options;
 
-  const res = await fetch(`${BASE_URL}${url}`, {
-    method: "PUT",
-    headers: headers(),
-    body: JSON.stringify(body),
-    ...restOptions,
-  });
-  const data = res.json();
+    const res = await fetch(`${BASE_URL}${url}`, {
+      method: "PUT",
+      headers: headers(),
+      body: JSON.stringify(body),
+      ...restOptions,
+    });
+    const data = res.json();
 
-  return data;
+    return data;
+  } catch (error) {
+    console.warn(error);
+  }
 };
 
 export const del = async (url, options) => {
-  const res = await fetch(`${BASE_URL}${url}`, {
-    method: "DELETE",
-    headers: headers(),
-    ...options,
-  });
-  const data = res.json();
-
-  return data;
+  try {
+    await fetch(`${BASE_URL}${url}`, {
+      method: "DELETE",
+      headers: headers(),
+      ...options,
+    });
+  } catch (error) {
+    console.warn(error);
+  }
 };
