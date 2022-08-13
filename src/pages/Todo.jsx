@@ -78,6 +78,7 @@ function TodoItem({ todo, fetchTodos }) {
       initialValue={todoContent}
       onSubmit={handleTodoForm}
       submitButton="수정"
+      onCancle={toggleEditButton}
     />
   ) : (
     <div className="w-full shadow-lg border flex justify-between px-5 py-6 flex-col gap-4 rounded-lg">
@@ -94,7 +95,12 @@ function TodoItem({ todo, fetchTodos }) {
   );
 }
 
-function TodoForm({ onSubmit, initialValue = "", submitButton = "추가" }) {
+function TodoForm({
+  onSubmit,
+  initialValue = "",
+  submitButton = "추가",
+  onCancle,
+}) {
   const { inputs, handleInput, reset } = useInputs({ todo: initialValue });
   const { todo } = inputs;
 
@@ -114,6 +120,7 @@ function TodoForm({ onSubmit, initialValue = "", submitButton = "추가" }) {
     >
       <Input name="todo" value={todo} onChange={handleInput} />
       <Button>{submitButton}</Button>
+      {onCancle != null && <Button onClick={onCancle}>취소</Button>}
     </form>
   );
 }
