@@ -3,7 +3,7 @@ import Home from "pages/Home";
 import Todo from "pages/Todo";
 import { util } from "utils";
 import Signup from "pages/Signup";
-import { AuthProvider } from "components";
+import { AuthProvider, RequireAuth } from "components";
 
 const routes = [
   {
@@ -12,7 +12,11 @@ const routes = [
   },
   {
     path: "/todo",
-    element: <Todo />,
+    element: (
+      <RequireAuth>
+        <Todo />
+      </RequireAuth>
+    ),
   },
   {
     path: "/signup",

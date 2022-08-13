@@ -1,19 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export const AuthContext = React.createContext(null);
 
 export default function AuthProvider({ children }) {
-  const [user, setUser] = React.useState(null);
+  const [isLogin, setIsLogin] = useState(false);
 
-  const signin = (newUser, callback) => {
-    return null;
-  };
+  useEffect(() => {
+    const access_token = localStorage.getItem("access_token");
+    if (access_token) setIsLogin(true);
+  }, []);
 
-  const signout = (callback) => {
-    return null;
-  };
-
-  const value = { user, signin, signout };
+  const value = { isLogin };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
