@@ -2,10 +2,11 @@ import { Button, Input } from "components";
 import React, { useCallback, useEffect, useState } from "react";
 import { api } from "services";
 import { createTodo, getTodos, updateTodo } from "services/api";
-import { useInputs } from "utils/hooks";
+import { useAuth, useInputs } from "utils/hooks";
 
 export default function Todo() {
   const [todos, setTodos] = useState([]);
+  const { signOut } = useAuth();
 
   const fetchTodos = useCallback(async () => {
     const data = await getTodos();
@@ -25,7 +26,10 @@ export default function Todo() {
   );
 
   return (
-    <main className="w-screen flex flex-col justify-center items-center py-10 px-14">
+    <main className="w-screen flex flex-col gap-10 justify-center items-center py-10 px-14">
+      <Button className="w-40 self-end" onClick={signOut}>
+        로그아웃
+      </Button>
       <TodoList todos={todos} fetchTodos={fetchTodos} />
       <TodoForm onSubmit={handleTodoForm} />
     </main>
