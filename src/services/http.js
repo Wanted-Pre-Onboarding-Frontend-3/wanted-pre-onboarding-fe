@@ -14,12 +14,6 @@ const headers = () => {
       };
 };
 
-const initToken = async (data) => {
-  const { access_token } = await data;
-  if (access_token) localStorage.setItem("access_token", access_token);
-  return data;
-};
-
 export const get = async (url, options) => {
   const res = await fetch(`${BASE_URL}${url}`, {
     method: "GET",
@@ -41,7 +35,7 @@ export const post = async (url, options) => {
   });
   const data = res.json();
 
-  return initToken(data);
+  return data;
 };
 
 export const put = async (url, options) => {

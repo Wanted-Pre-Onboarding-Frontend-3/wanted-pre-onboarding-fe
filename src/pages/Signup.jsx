@@ -1,7 +1,6 @@
 import { Anchor, Button, Input } from "components";
 import React, { useCallback } from "react";
-import { api } from "services";
-import { useInputs } from "utils/hooks";
+import { useAuth, useInputs } from "utils/hooks";
 
 export default function Signup() {
   const { inputs, handleInput } = useInputs({
@@ -9,6 +8,7 @@ export default function Signup() {
     password: "",
     passwordConfirm: "",
   });
+  const { signUp } = useAuth();
   const { email, password, passwordConfirm } = inputs;
 
   const isSubmitEnable = useCallback(({ email, password, passwordConfirm }) => {
@@ -24,9 +24,9 @@ export default function Signup() {
     async (e) => {
       e.preventDefault();
       if (isSubmitEnable(inputs) === false) return;
-      await api.signUp(inputs);
+      await signUp(inputs);
     },
-    [inputs, isSubmitEnable]
+    [inputs, isSubmitEnable, signUp]
   );
 
   return (
@@ -48,6 +48,8 @@ export default function Signup() {
           className="focus:outline-orange-400"
           placeholder="비밀번호"
           name="password"
+          type="password"
+          minLength={8}
           value={password}
           onChange={handleInput}
         />
@@ -56,6 +58,8 @@ export default function Signup() {
           placeholder="비밀번호 확인"
           name="passwordConfirm"
           value={passwordConfirm}
+          type="password"
+          minLength={8}
           onChange={handleInput}
         />
         <div className="flex gap-4 w-full">

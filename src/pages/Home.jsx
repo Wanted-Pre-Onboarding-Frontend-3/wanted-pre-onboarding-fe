@@ -1,16 +1,15 @@
 import { Anchor, Button, Input } from "components";
 import React from "react";
 import { Navigate } from "react-router";
-import { api } from "services";
 import { useAuth, useInputs } from "utils/hooks";
 
 export default function Home() {
-  const { inputs, handleInput } = useInputs();
-  const { isLogin } = useAuth();
-
+  const { inputs, handleInput } = useInputs({ email: "", password: "" });
+  const { isLogin, signIn } = useAuth();
+  const { email, password } = inputs;
   const handleForm = async (e) => {
     e.preventDefault();
-    await api.signIn(inputs);
+    await signIn(inputs);
   };
 
   if (isLogin) return <Navigate to="/todo" />;
@@ -25,14 +24,16 @@ export default function Home() {
           className="focus:outline-sky-400"
           placeholder="이메일"
           name="email"
-          value={inputs.email}
+          value={email}
           onChange={handleInput}
         />
         <Input
           className="focus:outline-sky-400"
           placeholder="비밀번호"
           name="password"
-          value={inputs.password}
+          type="password"
+          minLength={8}
+          value={password}
           onChange={handleInput}
         />
         <div className="flex gap-4 w-full">
