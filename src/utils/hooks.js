@@ -13,5 +13,9 @@ export function useInputs(initialValue = {}) {
     setInputs((prev) => ({ ...prev, [name]: value }));
   }, []);
 
-  return { inputs, handleInput };
+  const reset = useCallback(() => {
+    setInputs(initialValue);
+  }, [initialValue]);
+
+  return { inputs, handleInput, reset };
 }
