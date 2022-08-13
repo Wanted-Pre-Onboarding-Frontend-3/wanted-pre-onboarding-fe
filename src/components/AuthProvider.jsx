@@ -20,14 +20,19 @@ export default function AuthProvider({ children }) {
   };
 
   const signUp = async (inputs) => {
-    const { access_token } = await api.signIn(inputs);
+    const { access_token } = await api.signUp(inputs);
     if (access_token) {
       setIsLogin(() => true);
       localStorage.setItem("access_token", access_token);
     }
   };
 
-  const value = { isLogin, signIn, signUp };
+  const signOut = () => {
+    localStorage.removeItem("access_token");
+    setIsLogin(() => false);
+  };
+
+  const value = { isLogin, signIn, signUp, signOut };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

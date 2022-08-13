@@ -1,5 +1,6 @@
 import { Anchor, Button, Input } from "components";
 import React, { useCallback } from "react";
+import { Navigate } from "react-router";
 import { useAuth, useInputs } from "utils/hooks";
 
 export default function Signup() {
@@ -8,7 +9,7 @@ export default function Signup() {
     password: "",
     passwordConfirm: "",
   });
-  const { signUp } = useAuth();
+  const { signUp, isLogin } = useAuth();
   const { email, password, passwordConfirm } = inputs;
 
   const isSubmitEnable = useCallback(({ email, password, passwordConfirm }) => {
@@ -29,6 +30,7 @@ export default function Signup() {
     [inputs, isSubmitEnable, signUp]
   );
 
+  if (isLogin) return <Navigate to="/todo" />;
   return (
     <main className="w-screen h-screen flex flex-col justify-center items-center">
       <form

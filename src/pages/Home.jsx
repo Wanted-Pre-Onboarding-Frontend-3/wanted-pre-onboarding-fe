@@ -1,5 +1,5 @@
 import { Anchor, Button, Input } from "components";
-import React from "react";
+import React, { useMemo } from "react";
 import { Navigate } from "react-router";
 import { useAuth, useInputs } from "utils/hooks";
 
@@ -11,6 +11,10 @@ export default function Home() {
     e.preventDefault();
     await signIn(inputs);
   };
+
+  const enabled = useMemo(() => {
+    return email.includes("@") && password.length >= 8;
+  }, [email, password.length]);
 
   if (isLogin) return <Navigate to="/todo" />;
   return (
@@ -26,6 +30,7 @@ export default function Home() {
           name="email"
           value={email}
           onChange={handleInput}
+          type="email"
         />
         <Input
           className="focus:outline-sky-400"
@@ -37,7 +42,11 @@ export default function Home() {
           onChange={handleInput}
         />
         <div className="flex gap-4 w-full">
-          <Button className="bg-sky-400 text-white" type="submit">
+          <Button
+            className="bg-sky-400 text-white disabled:bg-gray-500"
+            type="submit"
+            disabled={enabled === false}
+          >
             로그인
           </Button>
           <Anchor
